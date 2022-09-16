@@ -1,5 +1,6 @@
-import { getDatabase, ref, child, get, DataSnapshot  } from "firebase/database";
+import { getDatabase, ref, child, get, DataSnapshot } from "firebase/database";
 import { initializeApp } from "firebase/app";
+import { useState } from "react";
 
 const firebaseConfig = {
   apiKey: "AIzaSyC65hxX3ZApTviIuQF_9-h_0QvVc0VZsT4",
@@ -17,12 +18,19 @@ const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 const dbRef = ref(getDatabase());
 
-get(child(dbRef, `ranking`)).then((snapshot) => {
-  console.log(snapshot.val());
-    
-  } 
-)
+
 
 export const App = () => {
-  return <h1></h1>;
+  get(child(dbRef, `ranking`)).then((snapshot) => {
+    setScore(snapshot.val())
+  }
+  )
+  const [score, setScore] = useState({})
+  return (
+    Object.keys(score).map(nome => {
+      return <div>
+        <b>{nome}</b>: {score[nome]} <br />
+      </div>
+    })
+  );
 };
