@@ -1,6 +1,7 @@
 import { getDatabase, ref, child, get, DataSnapshot } from "firebase/database";
 import { initializeApp } from "firebase/app";
 import { useState } from "react";
+import "./style.css";
 
 const firebaseConfig = {
   apiKey: "AIzaSyC65hxX3ZApTviIuQF_9-h_0QvVc0VZsT4",
@@ -18,8 +19,6 @@ const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 const dbRef = ref(getDatabase());
 
-
-
 export const App = () => {
   get(child(dbRef, `ranking`)).then((snapshot) => {
     setScore(snapshot.val())
@@ -28,7 +27,7 @@ export const App = () => {
   const [score, setScore] = useState({})
   return (
     Object.keys(score).map(nome => {
-      return <div>
+      return <div className="container">
         <b>{nome}</b>: {score[nome]} <br />
       </div>
     })
