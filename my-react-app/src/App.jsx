@@ -31,6 +31,7 @@ export const App = () => {
     Object.keys(score).map(nome => {
       return (
       <div className="container">
+        
         <Table striped bordered hover>
           <thead>
             <tr>
