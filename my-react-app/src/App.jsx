@@ -1,7 +1,9 @@
 import { getDatabase, ref, child, get, DataSnapshot } from "firebase/database";
 import { initializeApp } from "firebase/app";
 import { useState } from "react";
-import "./style.css";
+import React from 'react';
+import { Table } from 'reactstrap';
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyC65hxX3ZApTviIuQF_9-h_0QvVc0VZsT4",
@@ -27,9 +29,25 @@ export const App = () => {
   const [score, setScore] = useState({})
   return (
     Object.keys(score).map(nome => {
-      return <div className="container">
-        <b>{nome}</b>: {score[nome]} <br />
-      </div>
+      return (
+      <div className="container">
+        <Table striped bordered hover>
+          <thead>
+            <tr>
+              <th>Nome do Jogador</th>
+              <th>Pontuação do Jogador</th>  
+           </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{nome}</td>
+              <td>{score[nome]}</td>
+            </tr>
+          </tbody>
+        </Table>
+     
+        </div>    
+      )
     })
   );
 };
