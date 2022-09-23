@@ -35,8 +35,8 @@ export const App = () => {
         <Table striped bordered hover>
           <thead>
             <tr>
-              <th>Nome do Jogador</th>
-              <th>Pontuação do Jogador</th>  
+              <th>NOME DO JOGADOR</th>
+              <th>PONTUAÇÃO DO JOGADOR</th>  
            </tr>
           </thead>
           <tbody>
