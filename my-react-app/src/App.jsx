@@ -1,9 +1,10 @@
 import { getDatabase, ref, child, get, DataSnapshot } from "firebase/database";
 import { initializeApp } from "firebase/app";
 import { useState } from "react";
-import React from 'react';
-import { Table } from 'reactstrap';
-
+import React from "react";
+import { Table } from "reactstrap";
+import { Navbar } from "reactstrap";
+import "./style.css";
 
 const firebaseConfig = {
   apiKey: "AIzaSyC65hxX3ZApTviIuQF_9-h_0QvVc0VZsT4",
@@ -23,32 +24,63 @@ const dbRef = ref(getDatabase());
 
 export const App = () => {
   get(child(dbRef, `ranking`)).then((snapshot) => {
-    setScore(snapshot.val())
-  }
-  )
-  const [score, setScore] = useState({})
+    setScore(snapshot.val());
+  });
+  const [score, setScore] = useState({});
   return (
-    Object.keys(score).map(nome => {
-      return (
-      <div className="container">
-        
-        <Table striped bordered hover>
-          <thead>
-            <tr>
-              <th>NOME DOS JOGADORES</th>
-              <th>PONTUAÇÃO DO JOGADOR</th>  
-           </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>{nome}</td>
-              <td>{score[nome]}</td>
-            </tr>
-          </tbody>
-        </Table>
-     
-        </div>    
-      )
-    })
+    <div className="container">
+      <Navbar>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <a class="navbar-brand" href="#">
+            Dashboard Top Tank
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="#">
+                  Home 
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  Top Tank Jogue Agora
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </Navbar>
+      <Table dark>
+        <thead>
+          <tr>
+            <th>NOME DO JOGADOR</th>
+            <th>PONTUAÇÃO DO JOGADOR</th>
+          </tr>
+        </thead>
+        <tbody>
+          {Object.keys(score).map((nome) => {
+            return (
+              <tr>
+                <td>{nome}</td>
+                <td>{score[nome]}</td>
+              </tr>
+            );
+          })}
+          ;
+        </tbody>
+      </Table>
+    </div>
   );
 };
